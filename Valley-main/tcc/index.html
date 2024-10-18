@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valley</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://unpkg.com/flowbite@1.5.4/dist/flowbite.min.js"></script>
+    <style>
+        body { margin: 0; }
+        .hero {
+            position: relative;
+            overflow: hidden;
+        }
+        canvas {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        .content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .gradient-bg {
+    background: linear-gradient(135deg, #5d4bfa, #635ac9, #02166e, #025dcc);
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s ease infinite;
+}
+
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+#menuToggle:hover {
+    transform: scale(1.1);
+}
+
+#menuToggle.active svg {
+    fill: #00aaff;
+}
+
+#mobileMenu {
+    transition: all 0.5s ease-in-out;
+}
+
+#mobileMenu.show {
+    display: block;
+}
+
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+    
+<nav class="border-gray-200 bg-gray-900">
+    <div class="flex flex-wrap items-center justify-between max-w-screen-xl mx-auto p-4">
+        <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
+            <img src="chat/img/valley.png" class="h-8" alt="Valley" />
+            <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Valley</span>
+        </a>
+
+        <div class="flex items-center md:order-2 space-x-1 md:space-x-2 rtl:space-x-reverse">
+            <a href="#" class="text-white hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">Login</a>
+
+            <a href="#" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Cadastre-se</a>
+
+            <button data-collapse-toggle="mega-menu" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mega-menu" aria-expanded="false">
+
+                <span class="sr-only">Open main menu</span>
+                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+                </svg>
+            </button>
+        </div>
+
+        <div id="mega-menu" class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1">
+            <ul class="flex flex-col mt-4 font-medium md:flex-row md:mt-0 md:space-x-8 rtl:space-x-reverse">
+                <li>
+                    <a href="#home" class="block py-2 px-3 text-white border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0 dark:text-blue-500 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700" aria-current="page">Início</a>
+                </li>
+                <li>
+                    <a href="#segurança" class="block py-2 px-3 text-white border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700">Segurança</a>
+                </li>
+                <li>
+                    <a href="#Projetos" class="block py-2 px-3 text-white border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700">Projetos</a>
+                </li>
+                <li>
+                    <a href="#Contato" class="block py-2 px-3 text-white border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700">Contatos</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+    <section class="hero h-screen flex items-center justify-center text-center relative">
+        <canvas id="three-canvas"></canvas>
+        <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+        <div class="content relative z-10">
+            <h1 class="text-6xl font-bold mb-6" id="home">Projetos criativos e investidores para o seu Negócio</h1>
+            <p class="text-lg mb-8">Nós conectamos vocês ao mundo cheio de novas ideias impressionantes com design moderno e tecnologias inovadoras.</p>
+            <div class="space-x-4">
+                <a href="#" class="bg-blue-500 px-6 py-3 rounded-lg hover:bg-blue-600 transition">Começar Agora</a>
+                <a href="#" class="text-white px-6 py-3 rounded-lg border border-white hover:bg-gray-700 transition">Saiba Mais</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-gray-900" id="segurança">
+        <div class="container mx-auto text-center"> 
+                <h2 class="text-4xl font-bold mb-12 text-white">
+                    Porque é <span class="text-blue-600 dark:text-blue-500">Seguro?</span>
+                </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+    
+                <div class="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 transition duration-300 ease-in-out">
+                    <img src="chat/img/simbolo-de-cadeado-para-interface-de-seguranca.png" alt="Cadeado" class="w-16 h-16 mx-auto mb-4">
+                    <h3 class="text-2xl font-bold mb-4 text-white">Informações</h3>
+                    <p class="text-gray-400">As suas informações financeiras e dados pessoais são armazenados em servidores seguros, com backup regular e proteção contra invasões.</p>
+                </div>
+    
+              
+                <div class="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 transition duration-300 ease-in-out">
+                    <img src="chat/img/dolar.png" alt="Pagamento" class="w-16 h-16 mx-auto mb-4">
+                    <h3 class="text-2xl font-bold mb-4 text-white">Transação</h3>
+                    <p class="text-gray-400">Medidas de segurança impedem fraudes e protegem transações financeiras, garantindo que os investimentos e retiradas sejam realizados de forma segura.</p>
+                </div>
+    
+               
+                <div class="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 transition duration-300 ease-in-out">
+                    <img src="chat/img/operador-com-fone-de-ouvido-na-tela-do-monitor.png" alt="Monitoramento" class="w-16 h-16 mx-auto mb-4">
+                    <h3 class="text-2xl font-bold mb-4 text-white">Desenvolvimento</h3>
+                    <p class="text-gray-400">Ao detectar atividades anômalas rapidamente, medidas podem ser tomadas para bloquear acessos maliciosos e proteger os usuários.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="py-20 bg-gray-800" id="Projetos">
+        <div class="container mx-auto text-center">
+            <h2 class="text-4xl font-bold mb-12 text-white">
+                <span class="underline underline-offset-3 decoration-8 decoration-blue-400">
+                    Projetos em destaque!
+                </span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <div class="bg-white text-gray-900 p-6 rounded-lg shadow-lg hover:shadow-2xl transition duration-300 ease-in-out transform hover:scale-105">
+                    <img src="chat/img/Condoview.png" alt="Condoview" class="w-full h-48 object-cover rounded mb-4">
+                    <h3 class="text-2xl font-bold mb-4">Condoview</h3>
+                    <p>Um projeto incrível para gestão de condomínios.</p>
+                </div>
+    
+                
+                <div class="bg-white text-gray-900 p-6 rounded-lg shadow-lg hover:shadow-2xl transition duration-300 ease-in-out transform hover:scale-105">
+                    <img src="chat/img/VIA.png" alt="VIA" class="w-full h-48 object-cover rounded mb-4">
+                    <h3 class="text-2xl font-bold mb-4">VIA</h3>
+                    <p>Uma solução inovadora de visualização de transportes sobre trilhos.</p>
+                </div>
+    
+                
+                <div class="bg-white text-gray-900 p-6 rounded-lg shadow-lg hover:shadow-2xl transition duration-300 ease-in-out transform hover:scale-105">
+                    <img src="#" alt="Spectrum" class="w-full h-48 object-cover rounded mb-4">
+                    <h3 class="text-2xl font-bold mb-4">Spectrum</h3>
+                    <p>Desenvolvimento de um jogo para pessoas com deficiência.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <section class="gradient-bg py-20 text-center relative overflow-hidden">
+        <div class="container mx-auto text-white relative z-10">
+            <h2 class="text-5xl font-bold mb-6" data-aos="fade-up" data-aos-duration="1000">Pronto para transformar o mercado de tecnologia?</h2>
+            <p class="text-lg mb-8" data-aos="fade-up" data-aos-duration="1200">Entre e comece seu projeto hoje mesmo!</p>
+            <a href="#" class="bg-white text-gray-900 px-8 py-4 rounded-lg hover:bg-gray-200 transition pulse-btn" data-aos="fade-up" data-aos-duration="1400">Fale Conosco</a>
+        </div>
+    
+       
+        <div class="absolute inset-0 z-0 gradient-animation"></div>
+    
+        
+        <div class="absolute inset-0 z-0">
+            <canvas id="techCanvas"></canvas>
+        </div>
+    </section>
+    
+    
+    <footer class="bg-gray-800 py-6" id="Contato">
+        <div class="container mx-auto text-center">
+            <a href="#Contatos"><p>&copy; 2024 Atlas. Todos os direitos reservados.</p></a>
+            <div class="flex justify-center space-x-4 mt-4">
+                <a href="#" class="hover:text-blue-400">Termos de Serviço</a>
+                <a href="#" class="hover:text-blue-400">Política de Privacidade</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+         AOS.init();
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('three-canvas'), alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+ 
+        const particleCount = 500;
+        const particles = new THREE.BufferGeometry();
+        const positions = new Float32Array(particleCount * 3);
+        const colors = new Float32Array(particleCount * 3);
+
+        for (let i = 0; i < particleCount; i++) {
+            
+            positions[i * 3] = (Math.random() - 0.5) * 100; 
+            positions[i * 3 + 1] = (Math.random() - 0.5) * 100; 
+            positions[i * 3 + 2] = (Math.random() - 0.5) * 100; 
+
+           
+            colors[i * 3] = Math.random();
+            colors[i * 3 + 1] = Math.random(); 
+            colors[i * 3 + 2] = Math.random(); 
+        }
+
+        particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        particles.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+        const particleMaterial = new THREE.PointsMaterial({ size: 0.5, vertexColors: true });
+        const particleSystem = new THREE.Points(particles, particleMaterial);
+        scene.add(particleSystem);
+
+        camera.position.z = 50;
+
+       
+        function animate() {
+            requestAnimationFrame(animate);
+
+           
+            particleSystem.rotation.x += 0.001;
+            particleSystem.rotation.y += 0.001;
+
+            renderer.render(scene, camera);
+        }
+        animate();
+
+       
+        window.addEventListener('resize', () => {
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+        });
+
+        
+        window.addEventListener('mousemove', (event) => {
+            const mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+            const mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+
+            camera.position.x = mouseX * 10; 
+            camera.position.y = mouseY * 10; 
+            camera.lookAt(scene.position); 
+        });
+    </script>
+</body>
+</html>
