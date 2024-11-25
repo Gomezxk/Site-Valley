@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Equipe Atlas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .fade-in {
+      opacity: 0;
+      animation: fadeIn 1.5s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    .team-card {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .team-card:hover {
+      transform: translateY(-10px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+
+  <!-- Seção de Destaque -->
+  <header class="relative bg-gray-800 text-white">
+    <img src="img/Captura de Tela (3).png" alt="Equipe Atlas" class="w-full h-[80vh] object-cover">
+    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+      <div class="text-center fade-in">
+        <h1 class="text-7xl font-bold mb-4">Atlas</h1>
+        <p class="text-lg">Criando inovação e transformando ideias em realidade.</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- Seção Nossa História -->
+  <section class="py-16 px-6 bg-white flex items-center">
+    <div class="max-w-screen-xl mx-auto flex gap-8 items-center">
+      <div class="flex-1 text-center fade-in">
+        <h2 class="text-4xl font-bold text-gray-800 mb-4">Nossa História</h2>
+        <p class="text-lg text-gray-600 mb-8">
+          Desde o início, a Equipe Atlas nasceu com o propósito de transformar sonhos em realidades tecnológicas. 
+          Começamos como um pequeno grupo de inovadores apaixonados e vamos crescer para nos tornar uma força dedicada a resolver 
+          problemas do mundo real, com criatividade, engenhosidade e um compromisso inabalável com a excelência.
+        </p>
+        <p class="text-lg text-gray-600">
+          Hoje, continuamos avançando, sempre motivados por nossa visão de criar um futuro onde a tecnologia conecte pessoas, 
+          impulsione ideias e construa um mundo mais inteligente e sustentável.
+        </p>
+      </div>
+      <div class="flex-1 fade-in">
+        <img src="img/WhatsApp_Image_2024-11-03_at_10.20.09-removebg-preview.png" alt="Imagem da equipe" class="w-[200px] h-auto rounded-lg mx-auto">
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
